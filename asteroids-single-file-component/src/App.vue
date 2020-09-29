@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div>
     <asteroids
       @remove="remove"
       :asteroids="asteroids"
@@ -30,8 +30,9 @@ export default {
       let apiKey = "UMQiCZXSffcfzANfzsZBxbliQrW5OVPQk6PKzD6a";
       let url = `https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=${apiKey}`;
 
-      axios.get(url).then(function(res) {
+      axios.get(url).then((res)=> {
         // vm.asteroids.push(...res.data.near_earth_objects.slice(0, 30));
+        //be carfull: use "this" with arrow ()=>{} function: target global context
         this.asteroids = res.data.near_earth_objects.slice(0, 30);
       });
     },
