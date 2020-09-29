@@ -12,30 +12,28 @@
 
 <body>
     <div id="app" class="container">
-        <greeting name="Jacob" />
+        <greeting message="Bonjour mister " name="Jacob" />
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    
     <script>
         //local component
-        const message= {
-            template:`<span>{{message}}</span>`,
-            data(){
-                return {
-                    message:"Hello "
-                }
-            },
+        const Message= {
+            props:["message","friend"],
+            template:`<span>{{message}} {{friend}}</span>`,
         }
         // global component
         Vue.component('greeting', {
-            props:["name"],
+            props:["message","name"],
+            //bind attributes in template
             template:`
                 <h1>
-                    <message/>{{this.name}}
+                    <message :message="message" :friend="name"/>
                 </h1>
             `,
             components:{
-                message,
+                Message,
             }
         });
 
