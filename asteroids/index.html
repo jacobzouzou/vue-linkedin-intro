@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<html lang="en">
+<link rel="stylesheet" href="style.css">
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue overview</title>
+</head>
+
+<body>
+    <div id="app">
+        <asteroids-grid @remove="remove" :asteroids="asteroids" header="Near earth objects" />
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="globalComponent-asteroid-grid.js"></script>
+<!-- <script src="localComponent-asteroid-grid.js"></script> -->
+
+
+<script type="module" crossorigin="anonymous">
+
+    const vm = new Vue({
+        // components:{AsteroidsGrid},
+        el: "#app",
+        data() {
+            return {
+                asteroids: []
+            }
+        },
+        created() {
+            this.fetchAstereoids();
+        },
+        methods: {
+            fetchAstereoids() {
+                let apiKey = "UMQiCZXSffcfzANfzsZBxbliQrW5OVPQk6PKzD6a";
+                let url = `https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=${apiKey}`;
+
+                axios.get(url)
+                    .then(function (res) {
+                        // vm.asteroids.push(...res.data.near_earth_objects.slice(0, 30));
+                        vm.asteroids = res.data.near_earth_objects.slice(0, 30);
+                    });
+            },
+            remove(index) {
+                this.asteroids.splice(index, 1);
+            },
+        },
+    });
+
+</script>
+
+</html>

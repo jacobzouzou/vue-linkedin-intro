@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Component</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <div id="app" class="container">
+        <greeting to="Alain" msg="Bonjour"/>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        //local component
+        //:msgBody get value of parameter
+        //this.msgBody to display value fo parameter
+        const message = {
+            props:["msgContent"],
+            template: 
+            `
+              <div>
+                <slot name="msgContent" :msgBody="this.msgContent">{{this.msgBody}}</slot>
+                <span :style="{fontStyle: 'italic'}"> <slot></slot></span>             
+              </div>
+            `,
+            data() {
+                return {
+                    message: " "
+                }
+            },
+        }
+
+        // global component
+        //"ns.msgBody" is a parameter pass to child slot
+        Vue.component('greeting', {
+            props: ["msg","to"],
+            template: `
+            <message :msgContent="this.msg">
+                <span slot="msgContent" slot-scope="ns">{{ns.msgBody}}</span>
+                <span>{{this.to ? this.to: 'my friend'}}</span>
+            </message>
+           `,
+            components: { message }
+        });
+
+        new Vue({
+            el: "#app"  ,
+        });
+
+    </script>
+
+</body>
+
+</html>
