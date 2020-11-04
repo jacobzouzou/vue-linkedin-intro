@@ -4,7 +4,8 @@ https://getbootstrap.com
 https://api.nasa.gov (api)
 https://github.com/axios
 
-SINGLE FILE COMPONENT:
+Single file component:
+**************************************************************
 install node.js: download and install
 install vue-cli: npm -g install vue
 create project : vue create project_name
@@ -14,6 +15,7 @@ install sass loader to use scss file :
 
 Production:
     npm run build
+    
 install intellisense for CSS class name in HTML extension
 
 Example of transition
