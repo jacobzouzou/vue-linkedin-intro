@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <html lang="en">
 <link rel="stylesheet" href="style.css">
 </style>
@@ -22,8 +21,7 @@
 <!-- <script src="localComponent-asteroid-grid.js"></script> -->
 
 
-<script type="module" crossorigin="anonymous">
-
+<script>
     const vm = new Vue({
         // components:{AsteroidsGrid},
         el: "#app",
@@ -41,7 +39,7 @@
                 let url = `https://api.nasa.gov/neo/rest/v1/neo/browse?api_key=${apiKey}`;
 
                 axios.get(url)
-                    .then(function (res) {
+                    .then(function(res) {
                         // vm.asteroids.push(...res.data.near_earth_objects.slice(0, 30));
                         vm.asteroids = res.data.near_earth_objects.slice(0, 30);
                     });
@@ -51,7 +49,6 @@
             },
         },
     });
-
 </script>
 
 </html>
